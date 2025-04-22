@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3D193D21-4441-4F65-9906-976269F58E42}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ReadingRoomApp</RootNamespace>
+    <AssemblyName>ReadingRoomApp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.9.0\lib\net462\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Common\Constants\AppConstants.cs" />
+    <Compile Include="Common\Constants\ErrorMessages.cs" />
+    <Compile Include="Common\Exceptions\ApplicationException.cs" />
+    <Compile Include="Common\Exceptions\DataAccessException.cs" />
+    <Compile Include="Common\Exceptions\ValidationException.cs" />
+    <Compile Include="Common\Extensions\CollectionExtensions.cs" />
+    <Compile Include="Common\Extensions\StringExtensions.cs" />
+    <Compile Include="Common\Logging\FileLogger.cs" />
+    <Compile Include="Common\Logging\ILogger.cs" />
+    <Compile Include="Common\Services\DateTimeProvider.cs" />
+    <Compile Include="Common\Services\FileService.cs" />
+    <Compile Include="Common\Services\IDateTimeProvider.cs" />
+    <Compile Include="Common\Services\IFileService.cs" />
+    <Compile Include="Core\DTOs\UserDto.cs" />
+    <Compile Include="Core\Interfaces\Services\IAuthorService.cs" />
+    <Compile Include="Core\Interfaces\Services\IGenreService.cs" />
+    <Compile Include="Core\Interfaces\Services\IReportService.cs" />
+    <Compile Include="Core\Interfaces\Services\IDataExchangeService.cs" />
+    <Compile Include="Core\Services\DataExchangeService.cs" />
+    <Compile Include="Core\Services\ReportService.cs" />
+    <Compile Include="Core\Services\UserService.cs" />
+    <Compile Include="Infrastructure\Data\Repositories\AuthorRepository.cs" />
+    <Compile Include="Infrastructure\Data\Repositories\GenreRepository.cs" />
+    <Compile Include="Infrastructure\Data\Repositories\ReaderRepository.cs" />
+    <Compile Include="Infrastructure\Data\Repositories\UserRepository.cs" />
+    <Compile Include="Infrastructure\Services\AuthenticationService.cs" />
+    <Compile Include="Core\Services\AuthorService.cs" />
+    <Compile Include="Core\Services\BookService.cs" />
+    <Compile Include="Core\Services\GenreService.cs" />
+    <Compile Include="Core\Services\ReaderService.cs" />
+    <Compile Include="Infrastructure\Data\Repositories\BookRepository.cs" />
+    <Compile Include="Infrastructure\Data\Repositories\FileAuthorRepository.cs" />
+    <Compile Include="Infrastructure\Data\Repositories\FileBookRepository.cs" />
+    <Compile Include="Infrastructure\Data\Repositories\FileGenreRepository.cs" />
+    <Compile Include="Infrastructure\Data\Repositories\FileReaderRepository.cs" />
+    <Compile Include="Infrastructure\Data\Repositories\FileUserRepository.cs" />
+    <Compile Include="Infrastructure\Data\UnitOfWork.cs" />
+    <Compile Include="Infrastructure\Helpers\PasswordHasher.cs" />
+    <Compile Include="Presentation\Behaviors\PasswordBoxBehavior.cs" />
+    <Compile Include="Presentation\Controls\LoadingOverlay.xaml.cs">
+      <DependentUpon>LoadingOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Converters\BoolToAvailabilityConverter.cs" />
+    <Compile Include="Presentation\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Presentation\Converters\NullToBoolConverter.cs" />
+    <Compile Include="Core\Domain\Entities\User.cs" />
+    <Compile Include="Core\Domain\Enums\BookStatus.cs" />
+    <Compile Include="Core\Domain\Enums\UserRole.cs" />
+    <Compile Include="Core\Interfaces\Repositories\IAuthorRepository.cs" />
+    <Compile Include="Core\Interfaces\Repositories\IBookRepository.cs" />
+    <Compile Include="Core\Interfaces\Repositories\IGenreRepository.cs" />
+    <Compile Include="Core\Interfaces\Repositories\IReaderRepository.cs" />
+    <Compile Include="Core\Interfaces\Repositories\IRepository.cs" />
+    <Compile Include="Core\Interfaces\Repositories\IUserRepository.cs" />
+    <Compile Include="Core\Interfaces\Services\IBookService.cs" />
+    <Compile Include="Core\Interfaces\Services\IReaderService.cs" />
+    <Compile Include="Core\Interfaces\Services\IUserService.cs" />
+    <Compile Include="Presentation\Commands\AsyncRelayCommand.cs" />
+    <Compile Include="Presentation\Converters\UserRoleToStringConverter.cs" />
+    <Compile Include="Presentation\Events\ApplicationEvents.cs" />
+    <Compile Include="Presentation\Events\EventAggregator.cs" />
+    <Compile Include="Presentation\Helpers\MessageBoxHelper.cs" />
+    <Compile Include="Presentation\Selectors\BookTemplateSelector.cs" />
+    <Compile Include="Presentation\Services\INavigationService.cs" />
+    <Compile Include="Presentation\Services\NavigationService.cs" />
+    <Compile Include="Presentation\Services\ResourceService.cs" />
+    <Compile Include="Presentation\Validation\BookValidator.cs" />
+    <Compile Include="Presentation\Validation\IValidator.cs" />
+    <Compile Include="Presentation\Validation\ReaderValidator.cs" />
+    <Compile Include="Presentation\Validation\ValidationResult.cs" />
+    <Compile Include="Presentation\ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="Infrastructure\Data\DatabaseContext.cs" />
+    <Compile Include="Presentation\ViewModels\Base\ViewModelLocator.cs" />
+    <Compile Include="Presentation\ViewModels\Data\DataExchangeViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Reader\EditReaderViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Report\GenerateReportsViewModel.cs" />
+    <Compile Include="Presentation\Views\Data\DataExchangeView.xaml.cs">
+      <DependentUpon>DataExchangeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Views\Reader\EditReaderView.xaml.cs">
+      <DependentUpon>EditReaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Interfaces\Services\IAuthenticationService.cs" />
+    <Compile Include="Infrastructure\Helpers\JsonHelper.cs" />
+    <Compile Include="Presentation\ViewModels\Book\AddBookViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Reader\AddReaderViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Book\BookDetailsViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Book\BookListViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Book\EditBookViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Auth\LoginViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Reader\ReaderDetailsViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Reader\ReaderListViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Auth\RegisterViewModel.cs" />
+    <Compile Include="Presentation\Views\Book\AddBookView.xaml.cs">
+      <DependentUpon>AddBookView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Views\Reader\AddReaderView.xaml.cs">
+      <DependentUpon>AddReaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Views\Book\BookDetailsView.xaml.cs">
+      <DependentUpon>BookDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Views\Book\BookListView.xaml.cs">
+      <DependentUpon>BookListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Views\Book\EditBookView.xaml.cs">
+      <DependentUpon>EditBookView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Views\Auth\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Views\Reader\ReaderDetailsView.xaml.cs">
+      <DependentUpon>ReaderDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Views\Reader\ReaderListView.xaml.cs">
+      <DependentUpon>ReaderListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Views\Auth\RegisterView.xaml.cs">
+      <DependentUpon>RegisterView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presentation\Commands\RelayCommand.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Presentation\Controls\LoadingOverlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Book\AddBookView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Data\DataExchangeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Reader\AddReaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Book\BookDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Book\BookListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Book\EditBookView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Auth\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Reader\EditReaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Reader\ReaderDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Reader\ReaderListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Auth\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Report\GenerateReportsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Domain\Entities\Author.cs" />
+    <Compile Include="Core\Domain\Entities\Book.cs" />
+    <Compile Include="Core\Domain\Entities\Genre.cs" />
+    <Compile Include="Core\Domain\Entities\Librarian.cs" />
+    <Compile Include="Core\Domain\Entities\Reader.cs" />
+    <Compile Include="Presentation\Views\Report\GenerateReportsView.xaml.cs">
+      <DependentUpon>GenerateReportsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Domain\ValueObjects\" />
+    <Folder Include="Resources\Icons\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
