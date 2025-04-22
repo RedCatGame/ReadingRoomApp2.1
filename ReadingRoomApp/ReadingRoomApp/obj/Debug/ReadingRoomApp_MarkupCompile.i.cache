@@ -1,0 +1,20 @@
+﻿ReadingRoomApp
+
+
+winexe
+C#
+.cs
+C:\Users\neko_\OneDrive\Рабочий стол\ReadingRoomApp2\ReadingRoomApp\ReadingRoomApp\obj\Debug\
+ReadingRoomApp
+none
+false
+DEBUG;TRACE
+C:\Users\neko_\OneDrive\Рабочий стол\ReadingRoomApp2\ReadingRoomApp\ReadingRoomApp\App.xaml
+15-1948732625
+
+111318017288
+17916461776
+MainWindow.xaml;Presentation\Controls\LoadingOverlay.xaml;Presentation\Views\Book\AddBookView.xaml;Presentation\Views\Data\DataExchangeView.xaml;Presentation\Views\Reader\AddReaderView.xaml;Presentation\Views\Book\BookDetailsView.xaml;Presentation\Views\Book\BookListView.xaml;Presentation\Views\Book\EditBookView.xaml;Presentation\Views\Auth\LoginView.xaml;Presentation\Views\MainWindow.xaml;Presentation\Views\Reader\EditReaderView.xaml;Presentation\Views\Reader\ReaderDetailsView.xaml;Presentation\Views\Reader\ReaderListView.xaml;Presentation\Views\Auth\RegisterView.xaml;Presentation\Views\Report\GenerateReportsView.xaml;
+
+True
+
