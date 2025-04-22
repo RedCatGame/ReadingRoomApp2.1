@@ -1,0 +1,183 @@
+﻿<UserControl x:Class="ReadingRoomApp.Presentation.Views.Data.DataExchangeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ReadingRoomApp.Presentation.Views.Data"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <StackPanel Grid.Row="0" Margin="20">
+            <TextBlock Text="Импорт/Экспорт данных" 
+                       Style="{StaticResource HeaderTextBlockStyle}"/>
+            <TextBlock Text="Управление данными приложения" 
+                       Foreground="Gray"/>
+        </StackPanel>
+
+        <!-- Основное содержимое -->
+        <Grid Grid.Row="1" Margin="20,0,20,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Левая панель с выбором типа действия -->
+            <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                <TextBlock Text="Действие:" 
+                           FontWeight="Bold" 
+                           Margin="0,0,0,10"/>
+
+                <ListBox ItemsSource="{Binding Actions}" 
+                         SelectedItem="{Binding SelectedAction}" 
+                         Margin="0,0,0,20"
+                         Height="120">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Padding="5,3"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock Text="Тип данных:" 
+                           FontWeight="Bold" 
+                           Margin="0,0,0,10"/>
+
+                <ListBox ItemsSource="{Binding DataTypes}" 
+                         SelectedItem="{Binding SelectedDataType}" 
+                         Margin="0,0,0,20"
+                         Height="100">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Padding="5,3"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <StackPanel Visibility="{Binding IsExportSelected, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <TextBlock Text="Формат экспорта:" 
+                               FontWeight="Bold" 
+                               Margin="0,0,0,10"/>
+
+                    <ComboBox ItemsSource="{Binding ExportFormats}" 
+                              SelectedItem="{Binding SelectedExportFormat}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Правая панель с настройками действия -->
+            <Border Grid.Column="1" 
+                    BorderBrush="#CCCCCC" 
+                    BorderThickness="1" 
+                    Padding="15">
+                <Grid>
+                    <!-- Экспорт данных -->
+                    <StackPanel Visibility="{Binding IsExportSelected, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <TextBlock Text="Экспорт данных" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"
+                                   Margin="0,0,0,15"/>
+
+                        <TextBlock TextWrapping="Wrap" Margin="0,0,0,15">
+                            <Run Text="Будет создан файл в формате"/>
+                            <Run Text="{Binding SelectedExportFormat, Mode=OneWay}" FontWeight="Bold"/>
+                            <Run Text="с данными типа"/>
+                            <Run Text="{Binding SelectedDataType, Mode=OneWay}" FontWeight="Bold"/>
+                        </TextBlock>
+
+                        <Button Content="Экспортировать" 
+                                Command="{Binding ExportCommand}"
+                                Width="150"
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,10"/>
+
+                        <Button Content="Открыть файл" 
+                                Command="{Binding OpenExportFileCommand}"
+                                Width="150"
+                                HorizontalAlignment="Left"/>
+                    </StackPanel>
+
+                    <!-- Импорт данных -->
+                    <StackPanel Visibility="{Binding IsImportSelected, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <TextBlock Text="Импорт данных" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"
+                                   Margin="0,0,0,15"/>
+
+                        <TextBlock TextWrapping="Wrap" Margin="0,0,0,15">
+                            <Run Text="Будут импортированы данные типа"/>
+                            <Run Text="{Binding SelectedDataType, Mode=OneWay}" FontWeight="Bold"/>
+                            <Run Text="из выбранного файла JSON или CSV."/>
+                        </TextBlock>
+
+                        <Button Content="Выбрать файл" 
+                                Command="{Binding BrowseImportFileCommand}"
+                                Width="150"
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,10"/>
+
+                        <Button Content="Импортировать" 
+                                Command="{Binding ImportCommand}"
+                                Width="150"
+                                HorizontalAlignment="Left"/>
+                    </StackPanel>
+
+                    <!-- Резервное копирование -->
+                    <StackPanel Visibility="{Binding IsBackupSelected, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <TextBlock Text="Резервное копирование" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"
+                                   Margin="0,0,0,15"/>
+
+                        <TextBlock TextWrapping="Wrap" Margin="0,0,0,15">
+                            <Run Text="Будет создана резервная копия всех данных приложения в формате JSON."/>
+                        </TextBlock>
+
+                        <Button Content="Создать резервную копию" 
+                                Command="{Binding BackupCommand}"
+                                Width="200"
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,10"/>
+
+                        <Button Content="Выбрать директорию..." 
+                                Command="{Binding BrowseBackupFolderCommand}"
+                                Width="200"
+                                HorizontalAlignment="Left"/>
+                    </StackPanel>
+
+                    <!-- Восстановление -->
+                    <StackPanel Visibility="{Binding IsRestoreSelected, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <TextBlock Text="Восстановление из резервной копии" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"
+                                   Margin="0,0,0,15"/>
+
+                        <TextBlock TextWrapping="Wrap" Margin="0,0,0,15" Foreground="#D32F2F">
+                            <Run Text="Внимание! Восстановление из резервной копии заменит все текущие данные."/>
+                            <Run Text="Убедитесь, что вы хотите выполнить это действие."/>
+                        </TextBlock>
+
+                        <Button Content="Выбрать резервную копию" 
+                                Command="{Binding RestoreCommand}"
+                                Width="200"
+                                HorizontalAlignment="Left"
+                                Background="#D32F2F"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Нижняя панель с кнопками -->
+        <Button Grid.Row="2" 
+                Content="Назад" 
+                Command="{Binding BackCommand}"
+                Width="120"
+                HorizontalAlignment="Left"
+                Margin="20"/>
+    </Grid>
+</UserControl>
